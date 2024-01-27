@@ -2,35 +2,24 @@ package com.example.myspringcucumber.steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@CucumberContextConfiguration
 public class StepDefinitions {
 
     @LocalServerPort
     private String port;
 
-    private RestTemplate restTemplate = new RestTemplate() {{
-        setErrorHandler(new ResponseErrorHandler() {
-            @Override
-            public boolean hasError(ClientHttpResponse response) throws IOException {
-                return false;
-            }
-
-            @Override
-            public void handleError(ClientHttpResponse response) throws IOException {
-
-            }
-        });
-    }};
+    @Autowired
+    private RestTemplate restTemplate;
 
     public ResponseEntity<String> responseEntityString;
 
