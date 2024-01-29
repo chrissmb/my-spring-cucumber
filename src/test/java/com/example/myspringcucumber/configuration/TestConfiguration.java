@@ -1,4 +1,4 @@
-package com.example.myspringcucumber.config;
+package com.example.myspringcucumber.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class TestConfiguration {
 
     @Bean
-    public RestTemplate restTemplate() {
+    public RestTemplate restTemplateTest() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setErrorHandler(new ResponseErrorHandler() {
             @Override
